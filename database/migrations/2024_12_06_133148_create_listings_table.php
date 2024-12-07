@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('offer_type_id')->constrained('offer_types');
             $table->integer('price');
             $table->string('contact_name');
+            $table->string('token');
             $table->string('phone');
             $table->bigInteger('area');
             $table->bigInteger('created_by');

@@ -11,5 +11,5 @@ class AppUser extends Model
 {
     use HasFactory, AsSource, Filterable;
 
-    protected $fillable = ['name', 'email', 'password', 'phone', 'address', 'google_id'];
+    protected $fillable = ['name', 'email', 'phone', 'address', 'google_id', 'token'];
 }
