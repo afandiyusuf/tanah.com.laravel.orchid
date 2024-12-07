@@ -56,8 +56,8 @@ class ListingResource extends Resource
                 ->title('Phone')
                 ->placeholder('Enter phone'),
 
-            Input::make('area (m2)')
-                ->title('Area')
+            Input::make('area')
+                ->title('Area (m2)')
                 ->placeholder('Enter area'),
 
             Input::make('created_by')
@@ -78,37 +78,37 @@ class ListingResource extends Resource
         return [
             TD::make('id'),
 
-            TD::make('description')
+            TD::make('description', 'Deskripsi')
                 ->render(function ($model) {
                     return Str::limit($model->description, 100);
                 }),
 
-            TD::make('property_type_id')
+            TD::make('property_type_id', 'Properti')
                 ->render(function ($model) {
                     return $model->propertyType->name;
                 }),
 
-            TD::make('offer_type_id')
+            TD::make('offer_type_id', 'Penawaran')
                 ->render(function ($model) {
                     return $model->offerType->name;
                 }),
 
-            TD::make('price')
+            TD::make('price', 'Harga')
                 ->render(function ($model) {
                     return number_format($model->price, 0, ',', ' ');
                 }),
 
 
-            TD::make('created_at', 'Date of creation')
+            TD::make('created_at', 'Tanggal Dibuat')
                 ->render(function ($model) {
                     return $model->created_at->toDateTimeString();
                 }),
-            TD::make('area')
+            TD::make('area', 'Luas')
                 ->render(function ($model) {
                     return $model->area . ' m2';
                 }),
 
-            TD::make('updated_at', 'Update date')
+            TD::make('updated_at', 'Tanggal Update')
                 ->render(function ($model) {
                     return $model->updated_at->toDateTimeString();
                 }),
