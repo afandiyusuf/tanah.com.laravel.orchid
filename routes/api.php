@@ -18,3 +18,5 @@ Route::middleware([EnsureTokenIsValid::class])->group(function(){
 });
 
 Route::get('/listings', [ListingController::class, 'index']);
+Route::get('/offer-types',[ListingController::class, 'offerTypes']);
+Route::get('/property-types',[ListingController::class, 'propertyTypes']);

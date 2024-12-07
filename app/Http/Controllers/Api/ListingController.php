@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Listing;
+use App\Models\OfferType;
+use App\Models\PropertyType;
 
 class ListingController extends Controller
 {
@@ -12,7 +14,7 @@ class ListingController extends Controller
         // To use pagination, add ?page=1&per_page=10 to the URL
         // Example: /api/listings?page=1&per_page=10
         $perPage = $request->input('per_page', 10); // Default 10 items per page
-        $listings = Listing::paginate($perPage);
+        $listings = Listing::with('propertyType', 'offerType')->paginate($perPage);
         return response()->json($listings);
     }
 
@@ -53,5 +55,15 @@ class ListingController extends Controller
         $user = \App\Models\AppUser::where('token', $request->input('token'))->first();
         $listings = Listing::where('created_by', $user->id)->paginate($perPage);
         return response()->json($listings);
+    }
+
+    public function offerTypes(){
+        $offerTypes = OfferType::all();
+        return response()->json($offerTypes);
+    }
+
+    public function propertyTypes(){
+        $propertyTypes = PropertyType::all();
+        return response()->json($propertyTypes);
     }
 }

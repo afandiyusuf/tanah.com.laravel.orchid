@@ -22,9 +22,7 @@ class GoogleController extends Controller
         if($finduser){
             $token = Str::random(200);
             $finduser->update(['token' => $token]);
-            return response()->json([
-                'state' => 'login',
-                'token' => $token]);
+            return redirect('http://localhost:3000/auth?token='.$token);
         }else{
             $newUser = AppUser::create([
                 'name' => $user->name,
@@ -32,10 +30,8 @@ class GoogleController extends Controller
                 'google_id' => $user->id,
                 'token' => Str::random(200),
             ]);
-            return response()->json([
-                'state' => 'register',
-                'token' => $newUser->token
-            ]);
+            return redirect('http://localhost:3000/auth?token='.$newUser->token);
+
         }
     }
 }
