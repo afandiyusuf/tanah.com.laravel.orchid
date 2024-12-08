@@ -22,7 +22,7 @@ class GoogleController extends Controller
         if($finduser){
             $token = Str::random(200);
             $finduser->update(['token' => $token]);
-            return redirect('https://listing.tanah.com/auth?token='.$token);
+            return redirect(config('app.google_client_callback').'?token='.$token);
         }else{
             $newUser = AppUser::create([
                 'name' => $user->name,
@@ -30,7 +30,7 @@ class GoogleController extends Controller
                 'google_id' => $user->id,
                 'token' => Str::random(200),
             ]);
-            return redirect('https://listing.tanah.com/auth?token='.$newUser->token);
+            return redirect(config('app.google_client_callback').'?token='.$newUser->token);
 
         }
     }
