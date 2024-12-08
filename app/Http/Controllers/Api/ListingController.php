@@ -14,7 +14,20 @@ class ListingController extends Controller
         // To use pagination, add ?page=1&per_page=10 to the URL
         // Example: /api/listings?page=1&per_page=10
         $perPage = $request->input('per_page', 10); // Default 10 items per page
-        $listings = Listing::with('propertyType', 'offerType')->paginate($perPage);
+
+        $query = Listing::with('propertyType', 'offerType');
+
+        // Filter by offer_type_id if provided
+        if ($request->has('offer_type_id')) {
+            $query->where('offer_type_id', $request->input('offer_type_id'));
+        }
+
+        // Filter by property_type_id if provided
+        if ($request->has('property_type_id')) {
+            $query->where('property_type_id', $request->input('property_type_id'));
+        }
+
+        $listings = $query->paginate($perPage);
         return response()->json($listings);
     }
 
@@ -53,7 +66,19 @@ class ListingController extends Controller
         // Example: /api/me/listings?page=1&per_page=10
         $perPage = $request->input('per_page', 10); // Default 10 items per page
         $user = \App\Models\AppUser::where('token', $request->input('token'))->first();
-        $listings = Listing::where('created_by', $user->id)->paginate($perPage);
+        $query = Listing::with('propertyType', 'offerType')->where('created_by', $user->id);
+
+        // Filter by offer_type_id if provided
+        if ($request->has('offer_type_id')) {
+            $query->where('offer_type_id', $request->input('offer_type_id'));
+        }
+
+        // Filter by property_type_id if provided
+        if ($request->has('property_type_id')) {
+            $query->where('property_type_id', $request->input('property_type_id'));
+        }
+
+        $listings = $query->paginate($perPage);
         return response()->json($listings);
     }
 
