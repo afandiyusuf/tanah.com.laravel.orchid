@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'google_client_callback' => env('GOOGLE_CLIENT_CALLBACK', 'http://localhost:3000/auth'),
+    'google_client_callback' => env('GOOGLE_CLIENT_CALLBACK', 'https://listing.tanah.com/auth'),
 
     /*
     |--------------------------------------------------------------------------
