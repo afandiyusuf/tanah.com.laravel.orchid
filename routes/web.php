@@ -7,7 +7,7 @@ use App\Http\Controllers\AppUserController;
 use App\Http\Middleware\EnsureTokenIsValid;
 
 Route::get('/', function () {
-    return view('welcome');
+    return '';
 });
 
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle']);
